@@ -1,2 +1,4 @@
+import RepositorioServico from './RepositorioServico'
 import Servico from './Servico'
-export type { Servico }
+export type { RepositorioServico, Servico }
+

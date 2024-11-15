@@ -1,12 +1,31 @@
-import { Controller, Get } from '@nestjs/common';
-import { PrismaService } from 'src/db/prisma.service';
+import { Servico } from '@barba/core';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ServicoRepository } from './servico.repository';
 
 @Controller('servico')
 export class ServicoController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly repo: ServicoRepository) {}
 
   @Get()
   buscarTodos() {
-    return this.prisma.servico.findMany();
+    return this.repo.listarTodos();
   }
+
+  @Post()
+  criar(@Body() servico: Servico) {
+    return this.repo.criar(servico)
+  }
+
+  @Patch(':id')
+  atualizar(
+    @Param('id') id: string,
+    @Body() servico: Servico) {
+    return this.repo.atualizar(parseInt(id), servico)
+  }
+
+  @Delete(':id')
+  excluir(@Param('id') id: string) {
+    return this.repo.excluir(+id)
+  }
+
 }
