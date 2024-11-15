@@ -1,8 +1,8 @@
-import { HttpException, Injectable, NestMiddleware } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
-import { UsuarioRepository } from './usuario.repository';
-import * as jwt from 'jsonwebtoken';
 import { Usuario } from '@barba/core';
+import { HttpException, Injectable, NestMiddleware } from '@nestjs/common';
+import { NextFunction, Request, Response } from 'express';
+import * as jwt from 'jsonwebtoken';
+import { UsuarioRepository } from './usuario.repository';
 
 @Injectable()
 export class UsuarioMiddleware implements NestMiddleware {
