@@ -54,7 +54,9 @@ export default function useAPI() {
         let conteudo = ''
         try {
             conteudo = await resp.text()
+            //console.log('conteudo', conteudo)
             return JSON.parse(conteudo)
+
         } catch (e) {
             return conteudo
         }

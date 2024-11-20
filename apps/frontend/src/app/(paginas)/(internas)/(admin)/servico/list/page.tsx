@@ -1,26 +1,36 @@
 "use client";
 import { Servico } from "@barba/core";
-import { useCallback, useEffect, useState } from "react";
-import Cabecalho from "../../../../../../components/shared/Cabecalho";
-import useAPI from "../../../../../../data/hooks/useAPI";
+import { Flex } from "@radix-ui/themes";
+import { useState } from "react";
+import { useServicos } from "../../../../../../features/servicos/api/fetch-servicos";
+import ActionsService from "../components/ActionsService";
+import ServicoTable from "../components/ServicoTable";
 
 const ServicoList = () => {
-  const { httpGet } = useAPI();
+  //const { httpGet } = useAPI();
+  const { data: servis, isPending, isError } = useServicos();
   const [servicos, setServicos] = useState<Servico[]>([]);
-  const carregarServicos = useCallback(async () => {
-    const servicos = await httpGet(`servico`);
-    setServicos(servicos);
-    console.log("servicos", servicos);
-  }, []);
-  useEffect(() => {
-    carregarServicos();
-  }, []);
+  //const carregarServicos = useCallback(async () => {
+  //  const servicos = await httpGet(`servico`);
+  //  setServicos(servicos);
+  //  console.log("servicos", servicos);
+  //}, []);
+  //useEffect(() => {
+  //  carregarServicos();
+  //}, []);
   return (
     <>
-      <Cabecalho titulo="Serviços" descricao="Gerência de Serviços." />
-      <div>Servicos</div>
+      <Flex direction="column" gap="2">
+        <ActionsService />
+        {servis && <ServicoTable servicos={servis} />}
+      </Flex>
     </>
   );
 };
+
+//export const metadata: Metadata = {
+//  title: "Barba Shop - Serviços",
+//  description: "Veja todos os serviços",
+//};
 
 export default ServicoList;
