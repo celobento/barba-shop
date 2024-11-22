@@ -68,7 +68,7 @@ model Servico {
   descricao            String
   preco                Float
   qtdeSlots            Int
-  imagemURL            String
+  imagemURL            String                @default("NONE")
   agendamentos         Agendamento[]
   servicosProfissional ServicoProfissional[]
 
