@@ -30,7 +30,7 @@ const ServicoNew = () => {
   } = useForm<ServicoForm>({
     resolver: zodResolver(servicoSchema),
   });
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data: ServicoForm) => {
     console.log("Chamou Submit", data);
     await mutation.mutate(data);
   });
@@ -64,7 +64,11 @@ const ServicoNew = () => {
                 <Form.Field className="FormField" name="nome">
                   <Flex justify="between" align="baseline">
                     <Form.Label className="FormLabel">Nome</Form.Label>
-                    {errors.nome?.message && errors.nome?.message}
+                    {errors.nome?.message && (
+                      <Text className={`text-red-500`}>
+                        * {errors.nome?.message}
+                      </Text>
+                    )}
                   </Flex>
                   <Form.Control asChild>
                     <TextField.Root {...register("nome")}></TextField.Root>
@@ -75,7 +79,11 @@ const ServicoNew = () => {
                     <Form.Field className="FormField" name="preco">
                       <Flex justify="between" align="baseline">
                         <Form.Label className="FormLabel">Preço</Form.Label>
-                        {errors.preco?.message && errors.preco?.message}
+                        {errors.preco?.message && (
+                          <Text className={`text-red-500`}>
+                            * {errors.preco?.message}
+                          </Text>
+                        )}
                       </Flex>
                       <Form.Control asChild>
                         <TextField.Root {...register("preco")}></TextField.Root>
@@ -86,7 +94,11 @@ const ServicoNew = () => {
                     <Form.Field className="FormField" name="qtdeSlots">
                       <Flex justify="between" align="baseline">
                         <Form.Label className="FormLabel">Qtd Slots</Form.Label>
-                        {errors.qtdeSlots?.message && errors.qtdeSlots?.message}
+                        {errors.qtdeSlots?.message && (
+                          <Text className={`text-red-500`}>
+                            * {errors.qtdeSlots?.message}
+                          </Text>
+                        )}
                       </Flex>
                       <Form.Control asChild>
                         <TextField.Root
@@ -99,7 +111,11 @@ const ServicoNew = () => {
                 <Form.Field className="FormField" name="descricao">
                   <Flex justify="between" align="baseline">
                     <Form.Label className="FormLabel">Descrição</Form.Label>
-                    {errors.descricao?.message && errors.descricao?.message}
+                    {errors.descricao?.message && (
+                      <Text className={`text-red-500`}>
+                        * {errors.descricao?.message}
+                      </Text>
+                    )}
                   </Flex>
                   <Form.Control asChild>
                     <textarea
@@ -118,7 +134,7 @@ const ServicoNew = () => {
             </Tabs.Content>
 
             <Tabs.Content value="profissionais">
-              <Text size="2">Access and update your documents.</Text>
+              <Text size="2">Lista de Profissionais deste serviço</Text>
             </Tabs.Content>
           </Box>
         </Tabs.Root>

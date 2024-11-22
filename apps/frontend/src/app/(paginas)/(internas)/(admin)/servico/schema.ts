@@ -2,8 +2,8 @@ import { z } from 'zod'
 
 export const servicoSchema = z.object({
     
-        nome: z.string().min(1, '* obrigatório').max(255),
-        descricao: z.string().min(1, '*obrigatório').max(255),
+        nome: z.string().min(1, 'obrigatório').max(255),
+        descricao: z.string().min(1, 'obrigatório').max(255),
         preco: z
         .preprocess(
           (a) => parseFloat(z.string().parse(a)),
