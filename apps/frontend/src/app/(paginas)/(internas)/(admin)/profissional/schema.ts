@@ -12,14 +12,14 @@ const TipoPessoaEnum = z.nativeEnum(TipoPessoa);
     FEMININO,
   }
   
-  enum EstadoCivil {
-    SOLTEIRO,
-    CASADO,
-    VIUVO,
-    DIVORCIADO,
+  export enum EstadoCivil {
+    SOLTEIRO = 'SOLTEIRO',
+    CASADO = 'CASADO',
+    VIUVO = 'VIUVO',
+    DIVORCIADO = 'DIVORCIADO',
   }
-  
-  
+  export const EstadoCivilEnum = z.nativeEnum(EstadoCivil);
+  export type EstadoCivilType = z.infer<typeof EstadoCivilEnum>;
 
 export const profissionalschema = z.object({
     tipoPessoa: z.string(),
@@ -27,9 +27,9 @@ export const profissionalschema = z.object({
     nomeFantasia: z.string().max(255, "Max 255 caracter"),
     email: z.string().email({message: 'Email Inválido'}),
     cpfCnpj: z.string().min(11).max(14),
+    estadoCivil: EstadoCivilEnum,
     /*
     dataNascimento: z.string().datetime(),
-    estadoCivil: z.nativeEnum(EstadoCivil),
     sexo: z.nativeEnum(Sexo),
     descricao: z.string().min(1, "obrigatório").max(255),
     imagemUrl: z.string().min(1, "obrigatório").max(255),

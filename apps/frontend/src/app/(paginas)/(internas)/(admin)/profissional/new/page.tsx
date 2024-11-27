@@ -19,8 +19,9 @@ import {
 import { IconArrowBackUp, IconCheck } from "@tabler/icons-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { profissionalschema } from "../schema";
+import { EstadoCivil, EstadoCivilEnum, profissionalschema } from "../schema";
 import { ProfissionalForm } from "../type";
+
 const ProfissionalNew = () => {
   const {
     register,
@@ -38,6 +39,7 @@ const ProfissionalNew = () => {
   });
   console.log("errors", errors);
   const [tipoPessoa, setTipoPessoa] = useState<string>("JURIDICA");
+  const [estadoCivil, setEstadoCivil] = useState<EstadoCivil>();
   console.log("tipoPessoa", tipoPessoa);
 
   const handleTipo = (tipo: String) => {
@@ -113,6 +115,49 @@ const ProfissionalNew = () => {
                     )}
                   />
                 </Form.Field>
+                <Form.Field className="FormField" name="estadoCivil">
+                  <Flex justify="between" align="baseline">
+                    <Form.Label className="FormLabel">Estado Civil</Form.Label>
+                    {errors.estadoCivil?.message && (
+                      <Text className={`text-red-500`}>
+                        * {errors.estadoCivil?.message}
+                      </Text>
+                    )}
+                  </Flex>
+
+                  <Controller
+                    name="estadoCivil"
+                    control={control}
+                    defaultValue={estadoCivil}
+                    render={({ field }) => (
+                      <RadioGroup.Root
+                        onValueChange={(tipo) => {
+                          console.log("estado", EstadoCivilEnum.parse(tipo));
+                          setEstadoCivil(EstadoCivilEnum.parse(tipo));
+                        }}
+                        defaultValue={estadoCivil}
+                        name="estadoCivil"
+                      >
+                        <Flex gap="5" align="center">
+                          <RadioGroup.Item
+                            value={EstadoCivil.SOLTEIRO}
+                            className="RadioGroupItem"
+                          ></RadioGroup.Item>
+                          <label className="Label" htmlFor="r2">
+                            Solteiro
+                          </label>
+                          <RadioGroup.Item
+                            value={EstadoCivil.CASADO}
+                            className="RadioGroupItem"
+                          ></RadioGroup.Item>
+                          <label className="Label" htmlFor="r2">
+                            Casado
+                          </label>
+                        </Flex>
+                      </RadioGroup.Root>
+                    )}
+                  />
+                </Form.Field>
                 <Form.Field className="FormField" name="cpfCnpj">
                   <Flex justify="between" align="baseline">
                     <Form.Label className="FormLabel">
@@ -130,7 +175,9 @@ const ProfissionalNew = () => {
                 </Form.Field>
                 <Form.Field className="FormField" name="nome">
                   <Flex justify="between" align="baseline">
-                    <Form.Label className="FormLabel">Nome</Form.Label>
+                    <Form.Label className="FormLabel">
+                      {tipoPessoa == "FISICA" ? "Nome" : "Razão Social"}
+                    </Form.Label>
                     {errors.nome?.message && (
                       <Text className={`text-red-500`}>
                         * {errors.nome?.message}
