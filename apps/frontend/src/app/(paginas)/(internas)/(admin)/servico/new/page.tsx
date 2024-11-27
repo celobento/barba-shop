@@ -9,18 +9,21 @@ import {
   Flex,
   Grid,
   Heading,
+  Separator,
   Tabs,
   Text,
   TextField,
 } from "@radix-ui/themes";
 import { IconArrowBackUp, IconCheck } from "@tabler/icons-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useCreateServico } from "../../../../../../features/servicos/api/create-servico";
 import { servicoSchema } from "../schema";
 import { ServicoForm } from "../type";
 
 const ServicoNew = () => {
+  const router = useRouter();
   const mutation = useCreateServico();
   const {
     register,
@@ -33,6 +36,7 @@ const ServicoNew = () => {
   const onSubmit = handleSubmit(async (data: ServicoForm) => {
     console.log("Chamou Submit", data);
     await mutation.mutate(data);
+    router.push("/servico/list");
   });
   console.log("errors", errors);
   return (
@@ -125,6 +129,7 @@ const ServicoNew = () => {
                     />
                   </Form.Control>
                 </Form.Field>
+                <Separator my="3" size="4" mt="5" mb="5" />
                 <Form.Submit asChild>
                   <Button>
                     <IconCheck /> Criar

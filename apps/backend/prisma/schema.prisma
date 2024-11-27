@@ -45,17 +45,17 @@ enum EstadoCivil {
 model Profissional {
   id                   Int                   @id @default(autoincrement())
   nome                 String                @db.VarChar(255)
-  nomeFantasia         String                @db.VarChar(255)
-  email                String                @db.VarChar(255)
-  dataNascimento       DateTime              @db.Timestamptz(3)
-  tipoPessoa           TipoPessoa
-  estadoCivil          EstadoCivil
-  cpfCnpj              String                @unique @db.VarChar(14)
-  sexo                 Sexo
-  descricao            String
-  imagemUrl            String
-  avaliacao            Float
-  quantidadeAvaliacoes Int
+  email                String?               @db.VarChar(255)
+  nomeFantasia         String?               @db.VarChar(255)
+  dataNascimento       DateTime?             @db.Timestamptz(3)
+  tipoPessoa           TipoPessoa?
+  estadoCivil          EstadoCivil?
+  cpfCnpj              String?               @unique @db.VarChar(14)
+  sexo                 Sexo?
+  descricao            String?
+  imagemUrl            String?
+  avaliacao            Float?
+  quantidadeAvaliacoes Int?
   agendamentos         Agendamento[]
   servicosProfissional ServicoProfissional[]
 
@@ -68,7 +68,7 @@ model Servico {
   descricao            String
   preco                Float
   qtdeSlots            Int
-  imagemURL            String                @default("NONE")
+  imagemURL            String?
   agendamentos         Agendamento[]
   servicosProfissional ServicoProfissional[]
 

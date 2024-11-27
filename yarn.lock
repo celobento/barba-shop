@@ -7523,6 +7523,7 @@ fresh@0.5.2:
   dependencies:
     "@barba/core" "*"
     "@barba/ui" "*"
+    "@hookform/resolvers" "^3.9.1"
     "@radix-ui/react-dropdown-menu" "^2.1.1"
     "@radix-ui/react-form" "^0.1.0"
     "@radix-ui/themes" "^3.1.6"

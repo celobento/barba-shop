@@ -20,7 +20,7 @@ const ProfissionalList = () => {
   return (
     <Flex direction="column" gap="2">
       <ProfissionalActions />
-      <ProfissionalTable profissionais={profissionais} />
+      {profissionais && <ProfissionalTable profissionais={profissionais} />}
     </Flex>
   );
 };

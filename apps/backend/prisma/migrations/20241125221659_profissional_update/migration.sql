@@ -1,0 +1,14 @@
+-- AlterTable
+ALTER TABLE "profissional" ALTER COLUMN "descricao" DROP NOT NULL,
+ALTER COLUMN "imagemUrl" DROP NOT NULL,
+ALTER COLUMN "avaliacao" DROP NOT NULL,
+ALTER COLUMN "quantidadeAvaliacoes" DROP NOT NULL,
+ALTER COLUMN "dataNascimento" DROP NOT NULL,
+ALTER COLUMN "email" DROP NOT NULL,
+ALTER COLUMN "estadoCivil" DROP NOT NULL,
+ALTER COLUMN "nomeFantasia" DROP NOT NULL,
+ALTER COLUMN "tipoPessoa" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "servico" ALTER COLUMN "imagemURL" DROP NOT NULL,
+ALTER COLUMN "imagemURL" DROP DEFAULT;
